@@ -27,14 +27,14 @@ class UsersController  {
             avatar
         }) 
 
-        return response.status(200).json("Usuário cadastrado com sucesso!")
+        return response.status(201).json("Usuário cadastrado com sucesso!")
     }
 
     async update(request, response) {
         const { name, email, old_password, password, avatar} = request.body;
-        const { id } = request.params;
+        const user_id = request.user.id;
 
-        const user = await knex("users").select("*").where("id", id).first()
+        const user = await knex("users").select("*").where("id", user_id).first()
 
         let newPassword;
 
@@ -72,7 +72,7 @@ class UsersController  {
         user.avatar = avatar ?? user.avatar;
 
         
-        const updatedUser = await knex("users").where("id", id).update({
+        const updatedUser = await knex("users").where("id", user_id).update({
         name,
         email,
         password: newPassword,
