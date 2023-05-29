@@ -95,11 +95,9 @@ class NotesController {
 
             return {
                 ...note,
-                tags: noteTags
+                tags: noteTags,
             }
         }); 
-        
-        console.log(notesWithTags)
     
         return response.status(200).json(notesWithTags)
     }

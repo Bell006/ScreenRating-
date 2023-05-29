@@ -44,9 +44,8 @@ class UsersController  {
 
         if(email) {
             const checkifEmailExists = await knex("users").select("email").where("email", email);
-    
             
-            if(checkifEmailExists != 0) {
+            if(checkifEmailExists != 0 && email !== user.email) {
                 throw new AppError("Este email já está em uso.")
             }
         }
