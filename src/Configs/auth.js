@@ -2,7 +2,7 @@
 
 module.exports = {
     jwt: {
-        secret: "default", //gerando o token
+        secret: process.env.AUTH_SECRET || "default", 
         expiresIn: "1d"
     }
 }
